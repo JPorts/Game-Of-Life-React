@@ -15,14 +15,13 @@ class Box extends React.Component{
             id={this.props.id}
             onClick={this.selectBox}
             />
-        );
+        )
 
     }
 }
 class Grid extends React.Component{
-
     render(){
-        const height = this.props.cols * 14;
+        const width = (this.props.cols * 16) + 1;
 
 
         var rowsArr =[];
@@ -33,7 +32,7 @@ class Grid extends React.Component{
             for(var j=0; j < this.props.cols; j++){
                 let boxId = i + "_" + j;
 
-                boxClass = this.props.gridFull[i][j] ? "Box On" : "Box Off";
+                boxClass = this.props.gridFull[i][j] ? "box On" : "box Off";
                 rowsArr.push(
                     <Box
                     boxClass={boxClass}
@@ -49,10 +48,10 @@ class Grid extends React.Component{
 
 
         return(
-            <div className="grid" style={{height: height}}>
+            <div className="grid" style={{width: width}}>
                 {rowsArr}
             </div>
-        );
+        )
     }
 }
 class Main extends React.Component{
@@ -64,7 +63,7 @@ class Main extends React.Component{
 
         this.state = {
             generation: 0,
-            gridfull: Array(this.rows).fill().map(() => Array(this.cols).fill(false))
+            gridFull: Array(this.rows).fill().map(() => Array(this.cols).fill(false))
         }
     }
 
@@ -73,9 +72,9 @@ class Main extends React.Component{
             <div>
                 <h1>The Game of Life</h1>
                 <Grid 
-                gridfull={this.state.gridfull}
-                rows={this.state.rows}
-                cols = {this.state.cols}
+                gridFull={this.state.gridFull}
+                rows={this.rows}
+                cols = {this.cols}
                 selectBox = {this.selectBox} />
                 <h2>Generations: {this.state.generation}</h2>
             </div>
